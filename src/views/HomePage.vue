@@ -1,23 +1,24 @@
 <template>
-  <div class="feature-products">
-    <product-card
-      v-for="(product, index) in products"
-      :product="product"
-      :key="index"
-      @buyProduct="buyProduct"
-    ></product-card>
-
-    <div class="count" @click="increaseCount">{{ count }}</div>
-    <button @click="decreaseCount">Minus</button>
-    <div>
-      {{ sumPlusEight }}
+  <div class="page">
+    <header-component ref="headerComponent"></header-component>
+    <section-title
+      :title="'Our popular products'"
+      :description="'Dry food, wet food and dog treats - only natural raw materials made with less pressure and temperature for a higher natural nutritional content.'"
+    ></section-title>
+    <div class="feature-products">
+      <product-card
+        v-for="(product, index) in products"
+        :product="product"
+        :key="index"
+        @addToCard="addToCard"
+      ></product-card>
     </div>
-
-    <input type="text" @change="changeSomething" />
   </div>
 </template>
 <script>
+import HeaderComponent from '@/components/HeaderComponent.vue'
 import ProductCard from '@/components/ProductCard.vue'
+import SectionTitle from '@/components/SectionTitle.vue'
 export default {
   props: {},
   data() {
@@ -27,91 +28,46 @@ export default {
           name: 'Caniene Freeze-dried nuggets food',
           tag: 'Dry Food',
           price: 120.0,
-          salePrice: 126.25
+          salePrice: 126.25,
+          img: '01.png'
         },
         {
           name: 'Caniene Freeze-dried nuggets food',
           tag: 'Dry Food',
           price: 120.0,
-          salePrice: 126.25
+          salePrice: 126.25,
+          img: '02.png'
         },
         {
           name: 'Caniene Freeze-dried nuggets food',
           tag: 'Dry Food',
           price: 120.0,
-          salePrice: 126.25
+          salePrice: 126.25,
+          img: '03.png'
         }
-      ],
-      message: 'THAO ABC, MAI PHUONGW XYX, TRNAGT CXXXX',
-      count: 0
+      ]
     }
   },
   components: {
-    ProductCard
+    ProductCard,
+    HeaderComponent,
+    SectionTitle
   },
   methods: {
-    increaseCount() {
-      this.count = this.count + 1
-    },
-
-    decreaseCount() {
-      this.count = this.count - 1
-    },
-
-    buyProduct(price) {
-      this.count = this.count + price
-    },
-    changeSomething(e) {
-      this.count = Number(e.target.value)
+    addToCard(product) {
+      if (this.$refs.headerComponent) {
+        this.$refs.headerComponent.sumTotal(product?.price)
+      }
     }
-  },
-  watch: {
-    count() {
-      console.log('Thay doi')
-    }
-  },
-  computed: {
-    sumPlusEight() {
-      return this.count + 8
-    }
-  },
-  beforeCreate() {
-    console.log('tao truoc')
-    console.log('count data', this.count)
-  },
-
-  created() {
-    console.log('Vua tao xong')
-    console.log('count data', this.count)
-  },
-
-  beforeMount() {
-    console.log('Chua mount')
-    console.log('count data', this.count)
-  },
-
-  mounted() {
-    console.log('Da mount roi')
-    console.log('count data', this.count)
-  },
-
-  beforeUpdate() {
-    console.log('Chua update')
-    console.log('count data', this.count)
-  },
-  updated() {
-    console.log('Update roi')
-    console.log('count data', this.count)
-  },
-
-  unmounted() {
-    console.log('Bo di')
-    console.log('count data', this.count)
   }
 }
 </script>
-<style>
-.count {
-  font-size: 50px;
+
+<style scoped>
+.feature-products {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
 }
 </style>
