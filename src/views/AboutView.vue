@@ -60,7 +60,6 @@ export default {
 
 <style scoped>
 .page {
-  font-family: 'Arial, sans-serif';
   color: #333;
 }
 
