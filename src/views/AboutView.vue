@@ -46,10 +46,10 @@ export default {
           img: 'mai-phuong.jpg'
         },
         {
-          name: 'Đức',
+          name: 'Đức Anh',
           role: 'Marketing Specialist',
           description:
-            'Đức is a marketing specialist who creates effective marketing strategies to promote our products and services.',
+            'Đức Anh is a marketing specialist who creates effective marketing strategies to promote our products and services.',
           img: 'duc.jpg'
         }
       ]
